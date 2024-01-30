@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="./assets/uni.8596067b.css" />
+    
     <meta charset="UTF-8" />
     <title>soyo</title>
   </head>
@@ -27,6 +27,18 @@
     }
   </style>
   <script>
+    function preloadImages() {
+      for (var i = 0; i < 8; i++) {
+        var img = new Image();
+        img.src = `./static/png/${i + 1}_crop.png`;
+      }
+    }
+
+    preloadImages();
+
+
+
+
     const angleDisplay = document.getElementById('angleDisplay');
     const main = document.getElementById('main');
     const arr = [0, 45, 90, 135, 180, 225, 270, 315, 360];
