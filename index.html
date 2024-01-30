@@ -1,24 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="./assets/uni.8596067b.css">
-
+    <link rel="stylesheet" href="./assets/uni.8596067b.css" />
     <meta charset="UTF-8" />
-    <script>
-      var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') ||
-        CSS.supports('top: constant(a)'))
-      document.write(
-        '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' +
-        (coverSupport ? ', viewport-fit=cover' : '') + '" />')
-    </script>
-    <title>uni_test</title>
-    <!--preload-links-->
-    <!--app-context-->
-    <script type="module" crossorigin src="./assets/index-03a9edbf.js"></script>
-    <link rel="stylesheet" href="./assets/index-5bfeadef.css">
+    <title>soyo</title>
   </head>
   <body>
-    <div id="app"><!--app-html--></div>
-    
+    <div id="app">
+      <img id="main" src="./static/png/2_crop.png" />
+    </div>
+    <div id="angleDisplay">Move your mouse to see the angle!</div>
   </body>
+  <style>
+    #app {
+      position: relative;
+      height: 100vh; /* 容器高度 */
+    }
+    #main {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); /* 确保完全居中 */
+      width: 700px;
+      height: auto;
+      
+    }
+  </style>
+  <script>
+    const angleDisplay = document.getElementById('angleDisplay');
+    const main = document.getElementById('main');
+    const arr = [0, 45, 90, 135, 180, 225, 270, 315, 360];
+    document.addEventListener("mousemove", (event) => {
+      // 获取鼠标位置
+      const mouseX = event.clientX;
+      const mouseY = event.clientY;
+
+      // 计算中心点
+      const centerX = window.innerWidth / 2 - 90;
+      const centerY = window.innerHeight / 2 - 100;
+
+      // 计算角度
+      const angleRad = Math.atan2(mouseY - centerY, mouseX - centerX);
+            const angleDeg = (angleRad * (360 / Math.PI) + 360)/2;
+
+      // 显示角度
+      var ans = 0;
+      for(var i = 0; i < arr.length; i++){
+        if(angleDeg >= arr[i]){
+          ans = i;
+        }
+      }
+      main.src = `./static/png/${ans + 1}_crop.png`;
+      angleDisplay.textContent = `./static/png/${ans + 1}_crop.png center: ${centerX}, ${centerY} mouse: ${mouseX}, ${mouseY} Angle: ${angleDeg.toFixed(2)}°`;
+    });
+  </script>
 </html>
