@@ -7,7 +7,15 @@
   </head>
   <body>
     <div id="app">
-      <img id="main" src="./static/png/2_crop.png" alt="Image/>
+
+      <img class="main" src="./static/png/1_crop.png" alt="Image"/>
+      <img class="main" src="./static/png/2_crop.png" alt="Image"/>
+      <img class="main" src="./static/png/3_crop.png" alt="Image"/>
+      <img class="main" src="./static/png/4_crop.png" alt="Image"/>
+      <img class="main" src="./static/png/5_crop.png" alt="Image"/>
+      <img class="main" src="./static/png/6_crop.png" alt="Image"/>
+      <img class="main" src="./static/png/7_crop.png" alt="Image"/>
+      <img class="main" src="./static/png/8_crop.png" alt="Image"/>
     </div>
     <div id="angleDisplay">Move your mouse to see the angle!</div>
   </body>
@@ -16,7 +24,7 @@
       position: relative;
       height: 100vh; /* 容器高度 */
     }
-    #main {
+    .main {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -40,7 +48,11 @@
 
 
     const angleDisplay = document.getElementById('angleDisplay');
-    const main = document.getElementById('main');
+    const main = document.querySelectorAll('.main');
+    for (var i = 0; i < main.length; i++) {
+      main[i].style.display = 'none';
+    }
+    main[0].style.display = 'block';
     const arr = [0, 45, 90, 135, 180, 225, 270, 315, 360];
     document.addEventListener("mousemove", (event) => {
       // 获取鼠标位置
@@ -62,7 +74,10 @@
           ans = i;
         }
       }
-      main.src = `./static/png/${ans + 1}_crop.png`;
+      for (var i = 0; i < main.length; i++) {
+        main[i].style.display = 'none';
+      }
+      main[ans].style.display = 'block';
       angleDisplay.textContent = `./static/png/${ans + 1}_crop.png center: ${centerX}, ${centerY} mouse: ${mouseX}, ${mouseY} Angle: ${angleDeg.toFixed(2)}°`;
     });
   </script>
